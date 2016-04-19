@@ -5,25 +5,32 @@
  *      Author: Utilizador
  */
 
+
 #ifndef POI_H_
 #define POI_H_
 
-#include <Passenger.h>
+#include <iostream>
+#include <vector>
+
+
+
 using namespace std;
+
 class POI{
 private:
 	string name;
 	int coordX, coordY;
 	int distance;
-	vector<Passenger> interestedPassengers;
+	vector<int> interestedPassengers;
 
 public:
-	POI(string name, int coordX, int coordY, int distance, vector<Passenger> interestedPassengers);
+	POI();
+	POI(string name, int coordX, int coordY, int distance);
 	string getName() const;
 	int getCoordX() const;
 	int getCoordY() const;
 	int getDistance() const;
-	vector<Passenger> getInterestedPassengers() const;
+	vector<int> getInterestedPassengers();
 
 
 };

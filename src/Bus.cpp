@@ -1,5 +1,9 @@
-#include <iostream>
-using namespace std;
+
+#include "Bus.h"
+
+//using namespace std;
+
+Bus::Bus(){}
 
 Bus:: Bus(int numMaxPassengers, int numPassengers){
 	this->numMaxPassengers = numMaxPassengers;
@@ -26,10 +30,14 @@ void Bus::setNumPasengers(int newPassengers){
 	newPassengers = numPassengers;
 }
 
-void Bus::removePassenger(Passenger passenger){
-	for(unsigned int i = 0; i <passengers.size(); i++){
-		if(passengers[i].getName() == passenger.getName()){
-			passengers.erase(passengers.begin() + (i-1));
-		}
-	}
-}
+//std::string operator==() {
+//	return std::string();
+//}
+//
+//void Bus::removePassenger(Passenger passenger){
+//	for(unsigned int i = 0; i <passengers.size(); i++){
+//		if(passengers[i].getName() == passenger.getName()){
+//			passengers.erase(passengers.begin() + (i-1));
+//		}
+//	}
+//}

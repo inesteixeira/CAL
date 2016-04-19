@@ -7,8 +7,13 @@
 
 #ifndef BUS_H_
 #define BUS_H_
+#include <iostream>
+#include <vector>
+#include "Passenger.h"
 
-#include <Passenger.h>;
+
+using namespace std;
+
 
 class Bus{
 private:
@@ -16,6 +21,7 @@ private:
 	int numPassengers;
 	vector<Passenger> passengers;
 public:
+	Bus();
 	Bus(int numMaxPassengers, int numPassengers);
 	int getNumMaxPassengers() const;
 	int getNumPassengers() const;

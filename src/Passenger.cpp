@@ -1,13 +1,21 @@
-#include <iostream>
+
+#include "Passenger.h"
+
 using namespace std;
 
-Passenger::Passenger(string name, vector<POI> pointsOfInterest){
+Passenger::Passenger() {
+}
+
+Passenger::Passenger(string name){
 	this->name = name;
-	this->pointsOfInterest = pointsOfInterest;
 }
 
 string Passenger::getName() const{
 	return name;
+}
+
+int Passenger::getId() const{
+	return id;
 }
 
 vector<POI> Passenger::getPointsOfInterest() const{
@@ -24,4 +32,5 @@ void Passenger::removePointOfInterest(POI pointOfInterest){
 			pointsOfInterest.erase(pointsOfInterest.begin() + (i-1));
 	}
 }
+
 
