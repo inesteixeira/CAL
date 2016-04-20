@@ -18,7 +18,8 @@ using namespace std;
 
 
 int main(){
-	Bus bus = new Bus();
+	Bus bus = Bus();
+	Graph graph =  Graph();
 	string line;
 	ifstream myfile ("POI.txt");
 	if(myfile.is_open()){
@@ -31,10 +32,11 @@ int main(){
 			Passenger p(name);
 			bus.addPassenger(p);
 			POI poi(poiName, coordX, coordY);
+			graph.addVertex(poi);
+
 		}
 	}
 	return 0;
-
 }
 
 int calculateDistance(POI poi1, POI poi2){
