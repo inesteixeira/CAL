@@ -15,6 +15,7 @@
 
 using namespace std;
 
+
 class Passenger{
 private:
 	string name;
@@ -29,6 +30,7 @@ public:
 	vector<POI> getPointsOfInterest() const;
 	void addPointOfInterest(POI pointOfInterest);
 	void removePointOfInterest(POI pointOfInterest);
+
 
 
 };

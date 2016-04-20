@@ -29,8 +29,6 @@ public:
 	void addPassenger(Passenger passenger);
 	void removePassenger(Passenger passenger);
 	vector<Passenger> getPassengers() const;
-
-
 };
 
 

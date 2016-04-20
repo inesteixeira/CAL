@@ -2,11 +2,10 @@
 
 POI::POI(){}
 
-POI::POI(string name, int coordX, int coordY, int distance){
+POI::POI(string name, int coordX, int coordY){
 	this->name = name;
 	this->coordX = coordX;
 	this->coordY = coordY;
-	this->distance =  distance;
 }
 
 int POI::getCoordX() const{
@@ -17,9 +16,9 @@ int POI::getCoordY() const{
 	return coordY;
 }
 
-int POI::getDistance() const{
+/*int POI::getDistance() const{
 	return distance;
-}
+}*/
 
 string POI::getName() const{
 	return name;

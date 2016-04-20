@@ -20,17 +20,15 @@ class POI{
 private:
 	string name;
 	int coordX, coordY;
-	int distance;
-	vector<int> interestedPassengers;
+	//int distance;
 
 public:
 	POI();
-	POI(string name, int coordX, int coordY, int distance);
+	POI(string name, int coordX, int coordY);
 	string getName() const;
 	int getCoordX() const;
 	int getCoordY() const;
-	int getDistance() const;
-	vector<int> getInterestedPassengers();
+	//int getDistance() const;
 
 
 };

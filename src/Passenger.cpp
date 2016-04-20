@@ -1,13 +1,15 @@
 
 #include "Passenger.h"
-
+static int id = 1;
 using namespace std;
 
 Passenger::Passenger() {
+	this->id = id++;
 }
 
 Passenger::Passenger(string name){
 	this->name = name;
+	this->id = id++;
 }
 
 string Passenger::getName() const{
@@ -32,5 +34,6 @@ void Passenger::removePointOfInterest(POI pointOfInterest){
 			pointsOfInterest.erase(pointsOfInterest.begin() + (i-1));
 	}
 }
+
 
 

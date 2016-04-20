@@ -16,6 +16,7 @@ vector<Passenger> Bus::getPassengers() const{
 
 void Bus::addPassenger(Passenger passenger){
 	passengers.push_back(passenger);
+	numPassengers++;
 }
 
 int Bus::getNumMaxPassengers() const{
