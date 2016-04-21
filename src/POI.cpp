@@ -1,32 +1,23 @@
 #include "POI.h"
 
-POI::POI(){}
+POI::POI() {
+}
 
-POI::POI(string name, int coordX, int coordY){
+POI::POI(string name, string spot) {
 	this->name = name;
-	this->coordX = coordX;
-	this->coordY = coordY;
+	this->spot=spot;
 }
 
-int POI::getCoordX() const{
-	return coordX;
+string POI::getSpot() const {
+	return spot;
 }
 
-int POI::getCoordY() const{
-	return coordY;
-}
 
 /*int POI::getDistance() const{
-	return distance;
-}*/
+ return distance;
+ }*/
 
-string POI::getName() const{
+string POI::getName() const {
 	return name;
 }
-
-
-
-
-
-
 

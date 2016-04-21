@@ -11,12 +11,9 @@
 #include <vector>
 #include "POI.h"
 
-
-
 using namespace std;
 
-
-class Passenger{
+class Passenger {
 private:
 	string name;
 	int id;
@@ -31,11 +28,6 @@ public:
 	void addPointOfInterest(POI pointOfInterest);
 	void removePointOfInterest(POI pointOfInterest);
 
-
-
 };
-
-
-
 
 #endif /* PASSENGER_H_ */

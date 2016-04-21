@@ -11,11 +11,9 @@
 #include <vector>
 #include "Passenger.h"
 
-
 using namespace std;
 
-
-class Bus{
+class Bus {
 private:
 	int numMaxPassengers;
 	int numPassengers;
@@ -30,7 +28,5 @@ public:
 	void removePassenger(Passenger passenger);
 	vector<Passenger> getPassengers() const;
 };
-
-
 
 #endif /* BUS_H_ */

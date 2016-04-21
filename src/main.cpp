@@ -16,22 +16,21 @@
 
 using namespace std;
 
-
-int main(){
+int main() {
 	Bus bus = Bus();
-	Graph graph =  Graph();
+	Graph graph = Graph();
 	string line;
-	ifstream myfile ("POI.txt");
-	if(myfile.is_open()){
-		while(getline(myfile, line)){
+	ifstream myfile("POI.txt");
+	if (myfile.is_open()) {
+		while (getline(myfile, line)) {
 			stringstream ss(line);
 			string poiName;
 			string name;
-			int coordX, coordY;
-			ss >> name >> poiName >> coordX >> coordY;
+			string spot;
+			ss >> name >> poiName >> spot;
 			Passenger p(name);
 			bus.addPassenger(p);
-			POI poi(poiName, coordX, coordY);
+			POI poi(poiName, spot);
 			graph.addVertex(poi);
 
 		}
@@ -39,8 +38,7 @@ int main(){
 	return 0;
 }
 
-int calculateDistance(POI poi1, POI poi2){
+int calculateDistance(POI poi1, POI poi2) {
 
 }
-
 

@@ -5,34 +5,27 @@
  *      Author: Utilizador
  */
 
-
 #ifndef POI_H_
 #define POI_H_
 
 #include <iostream>
 #include <vector>
 
-
-
 using namespace std;
 
-class POI{
+class POI {
 private:
 	string name;
-	int coordX, coordY;
+	string spot;
 	//int distance;
 
 public:
 	POI();
-	POI(string name, int coordX, int coordY);
+	POI(string name, string spot);
 	string getName() const;
-	int getCoordX() const;
-	int getCoordY() const;
+	string getString() const;
 	//int getDistance() const;
 
-
 };
-
-
 
 #endif /* POI_H_ */

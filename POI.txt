@@ -1,5 +1,5 @@
-Ines poi1 1 2
-Tomas poi1 1 2
-Joao poi3 2 1
-Ana poi3 2 2
-Pedro poi4 3 4
+Ines poi1 marques
+Tomas poi1 marques	
+Joao poi3 Ribeira	
+Ana poi3 Ribeira
+Pedro poi4 Villa

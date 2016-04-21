@@ -1,33 +1,33 @@
-
 #include "Bus.h"
 
 //using namespace std;
 
-Bus::Bus(){}
+Bus::Bus() {
+}
 
-Bus:: Bus(int numMaxPassengers, int numPassengers){
+Bus::Bus(int numMaxPassengers, int numPassengers) {
 	this->numMaxPassengers = numMaxPassengers;
 	this->numPassengers = numPassengers;
 }
 
-vector<Passenger> Bus::getPassengers() const{
+vector<Passenger> Bus::getPassengers() const {
 	return passengers;
 }
 
-void Bus::addPassenger(Passenger passenger){
+void Bus::addPassenger(Passenger passenger) {
 	passengers.push_back(passenger);
 	numPassengers++;
 }
 
-int Bus::getNumMaxPassengers() const{
+int Bus::getNumMaxPassengers() const {
 	return numMaxPassengers;
 }
 
-int Bus::getNumPassengers() const{
+int Bus::getNumPassengers() const {
 	return numPassengers;
 }
 
-void Bus::setNumPasengers(int newPassengers){
+void Bus::setNumPasengers(int newPassengers) {
 	newPassengers = numPassengers;
 }
 
