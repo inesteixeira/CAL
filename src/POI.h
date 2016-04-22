@@ -16,12 +16,14 @@ using namespace std;
 class POI {
 private:
 	string name;
+	bool visited;
 
 public:
-
 	POI();
-	POI(string name);
+	POI(string name, bool visited);
 	string getName() const;
+	bool getVisited() const ;
+	void setVisited(bool visited);
 };
 
 #endif /* POI_H_ */
