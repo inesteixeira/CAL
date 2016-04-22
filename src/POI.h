@@ -16,16 +16,12 @@ using namespace std;
 class POI {
 private:
 	string name;
-	string spot;
-	//int distance;
 
 public:
-	POI();
-	POI(string name, string spot);
-	string getName() const;
-	string getString() const;
-	//int getDistance() const;
 
+	POI();
+	POI(string name);
+	string getName() const;
 };
 
 #endif /* POI_H_ */

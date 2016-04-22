@@ -3,21 +3,13 @@
 POI::POI() {
 }
 
-POI::POI(string name, string spot) {
+POI::POI(string name) {
 	this->name = name;
-	this->spot=spot;
 }
 
-string POI::getSpot() const {
-	return spot;
-}
-
-
-/*int POI::getDistance() const{
- return distance;
- }*/
 
 string POI::getName() const {
 	return name;
 }
+
 
