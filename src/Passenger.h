@@ -21,7 +21,7 @@ private:
 
 public:
 	Passenger();
-	Passenger(string name);
+	Passenger(string name,vector<POI> pointsOfInterest);
 	string getName() const;
 	int getId() const;
 	vector<POI> getPointsOfInterest() const;

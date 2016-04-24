@@ -6,7 +6,7 @@ Passenger::Passenger() {
 	this->id = id++;
 }
 
-Passenger::Passenger(string name) {
+Passenger::Passenger(string name, vector<POI> pointsOfInterest) {
 	this->name = name;
 	this->id = id++;
 }

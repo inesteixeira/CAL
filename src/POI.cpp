@@ -3,9 +3,9 @@
 POI::POI() {
 }
 
-POI::POI(string name, bool visited) {
+POI::POI(string name, bool visit) {
 	this->name = name;
-	this->visited = visited;
+	this->visit = visit;
 }
 
 
@@ -13,11 +13,11 @@ string POI::getName() const {
 	return name;
 }
 
-bool POI::getVisited() const{
-	return visited;
+bool POI::getVisit() const{
+	return visit;
 }
 
-void POI::setVisited(bool visit){
-	this->visited = visit;
+void POI::setVisit(bool visit1){
+	this->visit = visit1;
 }
 
