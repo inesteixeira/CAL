@@ -91,7 +91,7 @@ void newPassenger(vector<Passenger> &passengers, vector<POI> &points, vector<POI
 		cout << points[i].getName() << " " ;
 	}
 	cout << endl;
-	for(unsigned int j = 0; j < numPois; j++){
+	for(int j = 0; j < numPois; j++){
 		cin >> poi;
 		for(unsigned int i = 0; i < points.size(); i++){
 			if(points[i].getName() == poi){

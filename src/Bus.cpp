@@ -1,8 +1,9 @@
 #include "Bus.h"
-
+static int numMaxPassengers = 30;
 //using namespace std;
 
 Bus::Bus() {
+	this->numMaxPassengers = numMaxPassengers++;
 }
 
 Bus::Bus(int numMaxPassengers, int numPassengers) {

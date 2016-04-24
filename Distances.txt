@@ -17,4 +17,5 @@ Clérigos;São Bento;0.950;1.7;
 Clérigos;Palácio da Bolsa;0.900;2.8;
 Clérigos;Ribeira;1.5;3.2;
 São Bento;Palácio da Bolsa;0.650;0.650;
-São Bento; Ribeira;1;1;
+São Bento;Ribeira;1;1;
+Palácio da Bolsa;Ribeira;0.600;0.900;
