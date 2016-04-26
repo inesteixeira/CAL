@@ -85,6 +85,7 @@ void newPassenger(vector<Passenger> &passengers, vector<POI> &points, vector<POI
 	int numPois;
 	vector<POI> pois;
 	cout << "Qual é o nome do passageiro? " ; cin >> name;
+
 	cout << "Quantos pontos de interesse quer visitar?"; cin >> numPois;
 	cout << "Que pontos de interesse quer visitar?" << endl;
 	for(unsigned int i = 0; i < points.size(); i++){
