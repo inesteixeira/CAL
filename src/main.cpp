@@ -123,12 +123,15 @@ void currentPOI(vector<POI> &points){
 void shortestPath(vector<POI> &pointsToVisit, vector<POI> &points, Graph &graph){
 
 	int distMin=30;
-	POI minPOI;
+
 
 	graph.dijkstraShortestPath(points[0]); //ponto inicial : Aliados
 
 	while(!pointsToVisit.empty()){
 		int j=0;
+		POI minPOI;
+		int distMin=30;
+
 		for(int i =0; i<pointsToVisit.size(); i++){
 			if(graph.getVertex(pointsToVisit[i])->getDist() < distMin){
 				distMin= graph.getVertex(pointsToVisit[i])->getDist();
@@ -137,9 +140,11 @@ void shortestPath(vector<POI> &pointsToVisit, vector<POI> &points, Graph &graph)
 			}
 		}
 
-		cout<< minPOI.getName() << endl;
+		cout<< pointsToVisit[j].getName() << endl;
+
+		graph.dijkstraShortestPath(pointsToVisit[j]);
 		pointsToVisit.erase(pointsToVisit.begin()+j);
-		graph.dijkstraShortestPath(minPOI);
+
 
 	}
 }
