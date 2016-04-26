@@ -21,3 +21,6 @@ void POI::setVisit(bool visit1){
 	this->visit = visit1;
 }
 
+bool POI::operator ==(const POI p1) const{
+	return (name == p1.getName());
+}

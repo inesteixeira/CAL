@@ -12,8 +12,8 @@
 #include <cstddef>
 using namespace std;
 
-  class Edge;
-  class Graph;
+class Edge;
+class Graph;
 
 const int NOT_VISITED = 0;
 const int BEING_VISITED = 1;
@@ -112,9 +112,9 @@ public:
 
 
 struct vertex_greater_than {
-    bool operator()(Vertex * a, Vertex * b) const {
-        return a->getDist() > b->getDist();
-    }
+	bool operator()(Vertex * a, Vertex * b) const {
+		return a->getDist() > b->getDist();
+	}
 };
 
 
@@ -245,12 +245,14 @@ bool Graph::addEdge(const POI &sourc, const POI &dest, double w) {
 	Vertex *vS, *vD;
 	while (found!=2 && it!=ite ) {
 		if ( (*it)->info == sourc.getName() )
-			{ vS=*it; found++;}
+		{ vS=*it; found++;}
 		if ( (*it)->info == dest.getName() )
-			{ vD=*it; found++;}
+		{ vD=*it; found++;}
 		it ++;
 	}
-	if (found!=2) return false;
+	if (found!=2){
+		return false;
+	}
 	vD->indegree++;
 	vS->addEdge(vD,w);
 
@@ -265,9 +267,9 @@ bool Graph::removeEdge(const POI &sourc, const POI &dest) {
 	Vertex *vS, *vD;
 	while (found!=2 && it!=ite ) {
 		if ( (*it)->info == sourc.getName() )
-			{ vS=*it; found++;}
+		{ vS=*it; found++;}
 		if ( (*it)->info == dest.getName() )
-			{ vD=*it; found++;}
+		{ vD=*it; found++;}
 		it ++;
 	}
 	if (found!=2)
@@ -290,8 +292,8 @@ vector<string> Graph::dfs() const {
 	vector<string> res;
 	it=vertexSet.begin();
 	for (; it !=ite; it++)
-	    if ( (*it)->visited==false )
-	    	dfs(*it,res);
+		if ( (*it)->visited==false )
+			dfs(*it,res);
 	return res;
 }
 
@@ -302,10 +304,10 @@ void Graph::dfs(Vertex *v,vector<string> &res) const {
 	typename vector<Edge >::iterator it= (v->adj).begin();
 	typename vector<Edge >::iterator ite= (v->adj).end();
 	for (; it !=ite; it++)
-	    if ( it->dest->visited == false ){
-	    	//cout << "ok ";
-	    	dfs(it->dest, res);
-	    }
+		if ( it->dest->visited == false ){
+			//cout << "ok ";
+			dfs(it->dest, res);
+		}
 }
 
 
@@ -408,8 +410,8 @@ void Graph::dfsVisit() {
 		(*it)->visited=false;
 	it=vertexSet.begin();
 	for (; it !=ite; it++)
-	    if ( (*it)->visited==false )
-	    	dfsVisit(*it);
+		if ( (*it)->visited==false )
+			dfsVisit(*it);
 }
 
 
@@ -420,9 +422,9 @@ void Graph::dfsVisit(Vertex *v) {
 	typename vector<Edge >::iterator ite= (v->adj).end();
 	for (; it !=ite; it++) {
 		if ( it->dest->processing == true) numCycles++;
-	    if ( it->dest->visited == false ){
-	    	dfsVisit(it->dest);
-	    }
+		if ( it->dest->visited == false ){
+			dfsVisit(it->dest);
+		}
 	}
 	v->processing = false;
 }
@@ -538,8 +540,10 @@ void Graph::dijkstraShortestPath(const POI &s) {
 		vertexSet[i]->processing = false;
 	}
 
+
 	Vertex* v = getVertex(s);
 	v->dist = 0;
+
 
 	vector< Vertex* > pq;
 	pq.push_back(v);

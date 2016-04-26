@@ -24,6 +24,7 @@ public:
 	string getName() const;
 	bool getVisit() const ;
 	void setVisit(bool visit);
+	bool operator ==(const POI p1) const;
 };
 
 #endif /* POI_H_ */
