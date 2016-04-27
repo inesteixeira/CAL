@@ -45,7 +45,7 @@ public:
 	string getInfo() const;
 	void setInfo(string info);
 
-	int getDist() const;
+	double getDist() const;
 	int getIndegree() const;
 
 	bool operator<(const Vertex vertex);
@@ -152,7 +152,7 @@ void Vertex::addEdge(Vertex *dest, double w) {
 
 
 
-int Vertex::getDist() const {
+double Vertex::getDist() const {
 	return this->dist;
 }
 

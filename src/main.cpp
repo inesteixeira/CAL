@@ -192,37 +192,32 @@ void visitPoints(vector<POI> &points){
  * to visit all the neccessary points of interest.
  */
 void shortestPath(vector<POI> &pointsToVisit, vector<POI> &points, Graph &graph, GraphViewer &gv) {
-
+	pointsToVisit.push_back(points[0]);
 	vector<POI> tmp= pointsToVisit;
-	vector<POI> *visitOrder;
-	int distTotal=0;
+	double distTotal=0;
+
 
 	graph.dijkstraShortestPath(points[0]); //ponto inicial : Aliados
-
-	cout << "O caminho percorrido será";
+	cout << "O caminho percorrido será: ";
 
 	while (!tmp.empty()) {
 		int j;
 		POI minPOI;
 		double distMin = 10000;
 		for (unsigned int i = 0; i < tmp.size(); i++) {
-
 			if (graph.getVertex(tmp[i])->getDist() < distMin) {
 				distMin = graph.getVertex(tmp[i])->getDist();
 				minPOI = tmp[i];
-
 				j = i;
 			}
 		}
-
-		cout<< "; " << graph.getVertex(tmp[j])->getInfo();
-		visitOrder.push_back(graph.getVertex(tmp[j]));
-
+		cout << graph.getVertex(tmp[j])->getInfo() << " ";
 		distTotal+=distMin;
 		graph.dijkstraShortestPath(tmp[j]);
 		tmp.erase(tmp.begin() + j);
 	}
-
+	cout << graph.getVertex(points[0])->getInfo();
+	distTotal += graph.getVertex(points[0])->getDist();
 	cout<< ".\nA distancia percorrida é " << distTotal << "km." << endl;
 }
 
