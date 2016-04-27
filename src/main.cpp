@@ -122,21 +122,16 @@ void newPassenger(vector<Passenger> &passengers, vector<POI> &points, vector<POI
 	for(int j = 0; j < numPois; j++){
 		cin >> poi;
 		for(unsigned int i = 0; i < points.size(); i++){
-			if(points[i].getName() == poi){
+			if(points[i].getName() == poi ){
 				POI newPoi(poi,true);
 				pois.push_back(newPoi);
+				pointsToVisit.push_back(newPoi);
 				gv.setVertexColor(i,"green");
 				gv.rearrange();
 			}
 		}
 	}
-	for(unsigned int i = 0; i < pois.size(); i++){
-		for(unsigned int j = 0; j < points.size(); j++){
-			if(pois[i].getName() != points[j].getName()){
-				points.push_back(points[i]);
-			}
-		}
-	}
+
 	Passenger newPass(name,pois);
 	passengers.push_back(newPass);
 }
