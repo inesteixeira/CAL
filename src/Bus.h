@@ -19,13 +19,37 @@ private:
 	int numPassengers;
 	vector<Passenger> passengers;
 public:
+	/**
+	 * @brief Bus constructor.
+	 */
 	Bus();
+	/**
+	 * @brief Bus constructor with the neccessary parameters.
+	 */
 	Bus(int numMaxPassengers, int numPassengers);
+	/**
+	 * @brief returns the max number of passengers.
+	 */
 	int getNumMaxPassengers() const;
+	/**
+	 * @brief returns the number of passengers.
+	 */
 	int getNumPassengers() const;
+	/**
+	 * @brief updates the number of passengers.
+	 */
 	void setNumPasengers(int numPassengers);
+	/**
+	 * @brief adds a passenger to the bus.
+	 */
 	void addPassenger(Passenger passenger);
+	/**
+	 * @brief removes the passenger from the bus,
+	 */
 	void removePassenger(Passenger passenger);
+	/**
+	 * @brief returns the vector of the passengers.
+	 */
 	vector<Passenger> getPassengers() const;
 };
 

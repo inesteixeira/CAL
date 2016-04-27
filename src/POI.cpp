@@ -15,6 +15,7 @@ string POI::getName() const {
 	return name;
 }
 
+
 bool POI::getVisit() const{
 	return visit;
 }
@@ -31,9 +32,11 @@ double POI::getX() const{
 	return x;
 }
 
+
 double POI::getY() const{
 	return y;
 }
+
 
 void POI::setX(double x){
 	this->x = x;
@@ -41,4 +44,8 @@ void POI::setX(double x){
 
 void POI::setY(double y){
 	this->y = y;
+}
+
+void POI::setId(double y){
+	this->id = y;
 }

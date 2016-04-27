@@ -33,6 +33,7 @@ class Vertex {
 	bool processing;
 	int indegree;
 	double dist;
+	Vertex* previous;
 public:
 
 	Vertex(POI in);
