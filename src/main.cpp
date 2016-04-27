@@ -31,7 +31,11 @@ void readDistances(Graph &graph){
 			double dist = atof(sdist.c_str());
 			POI source1(source, false);
 			POI dest2(dest, false);
-			if(!(graph.addEdge(source1, dest2,dist))) return;
+			if((graph.addEdge(source1, dest2,dist)) == false){
+				cout << "falhou!" << endl;
+			}
+			else return;
+
 		}
 
 	}
@@ -61,7 +65,7 @@ void readUsers(vector<POI> &pointsToVisit, vector<Passenger> &passengers){
 			string user;
 			getline(ss, user,';');
 			getline(ss,poiName);
-			POI poi (poiName,false);
+			POI poi (poiName,true);
 			pois.push_back(poi);
 			Passenger p(user,pois);
 			pointsToVisit.push_back(poi);
@@ -108,7 +112,7 @@ void newPassenger(vector<Passenger> &passengers, vector<POI> &points, vector<POI
 void currentPassengers(vector<Passenger> &passengers){
 	cout <<"Passageiros existentes: " ;
 	for(unsigned int i= 0; i < passengers.size(); i++){
-		cout << passengers[i].getName() << " ";
+		cout << passengers[i].getName() << "; ";
 	}
 	cout << endl;
 }
@@ -116,37 +120,47 @@ void currentPassengers(vector<Passenger> &passengers){
 void currentPOI(vector<POI> &points){
 	cout << "POI existentes: " ;
 	for(unsigned int i = 0; i <points.size(); i++){
-		cout << points[i].getName() << " ";
+		cout << points[i].getName() << "; ";
+	}
+	cout << endl;
+}
+
+void visitPoints(vector<POI> &points){
+	for(unsigned int i = 0; i < points.size(); i++){
+		if(points[i].getVisit() == true){
+			cout << points[i].getName() << " ";
+		}
 	}
 	cout << endl;
 }
 
 void shortestPath(vector<POI> &pointsToVisit, vector<POI> &points, Graph &graph){
-
 	int distMin=30;
-
-
-	graph.dijkstraShortestPath(points[0]); //ponto inicial : Aliados
-
-	while(!pointsToVisit.empty()){
+	//graph.dijkstraShortestPath(points[0]); //ponto inicial : Aliados
+	while(!points.empty()){
 		int j=0;
-		POI minPOI;
-		int distMin=30;
 
-		for(int i =0; i<pointsToVisit.size(); i++){
-			if(graph.getVertex(pointsToVisit[i])->getDist() < distMin){
-				distMin= graph.getVertex(pointsToVisit[i])->getDist();
-				minPOI = pointsToVisit[i];
-				j=i;
+		//POI minPOI;
+		int distMin=30;
+		for(unsigned int i = 0; i < points.size(); i++){
+			//cout << "entra: " << endl;
+			graph.dijkstraShortestPath(points[i]);
+			if(points[i].getVisit() == 1){
+				//cout << "entra 1, dist: " << endl;
+				cout << graph.getVertex(points[i])->getDist() << endl;
+				if(graph.getVertex(points[i])->getDist() <= distMin ){
+					//cout << " entra 2 " << endl;
+					distMin= graph.getVertex(points[i])->getDist();
+					//minPOI = points[i];
+
+					j=i;
+				}
 			}
 		}
 
-		cout<< pointsToVisit[j].getName() << endl;
 
-		graph.dijkstraShortestPath(pointsToVisit[j]);
-		pointsToVisit.erase(pointsToVisit.begin()+j);
-
-
+		//graph.dijkstraShortestPath(points[j]);
+		points.erase(points.begin()+j);
 	}
 }
 int menus(vector<Passenger> &passengers, vector<POI> &points, vector<POI> &pointsToVisit, Graph &graph){
@@ -156,6 +170,7 @@ int menus(vector<Passenger> &passengers, vector<POI> &points, vector<POI> &point
 	cout << " 2- Ver passageiros existentes." << endl;
 	cout << " 3- Ver Pontos de Interesse existentes." << endl;
 	cout << " 4- Calcular o caminho mais curto." << endl;
+	cout << " 5- Ver Pontos de Interesse a visitar." << endl;
 	cout << " 9- Sair." << endl;
 	cin >> next;
 
@@ -163,6 +178,7 @@ int menus(vector<Passenger> &passengers, vector<POI> &points, vector<POI> &point
 	if(next ==2) currentPassengers(passengers);
 	if(next ==3) currentPOI(points);
 	if(next ==4) shortestPath(pointsToVisit,points, graph);
+	if(next ==5) visitPoints(pointsToVisit);
 	if(next ==9) return -1;
 
 }
@@ -178,6 +194,7 @@ int main() {
 	readPointsOfInterest(points, graph);
 	readDistances(graph);
 	readUsers(pointsToVisit, passengers);
+	checkVisitedPoints(points,pointsToVisit);
 
 
 	do{
