@@ -1,5 +1,5 @@
 Ines;Se do Porto
 Tomas;Ribeira
 Joao;Palacio da Bolsa
-Ana;Rivolli
+Ana;Rivoli
 Pedro;Livraria Lello

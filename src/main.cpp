@@ -9,6 +9,7 @@
 #include "Graph.h"
 #include "Passenger.h"
 #include "POI.h"
+#include "graphviewer.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -18,9 +19,10 @@
 using namespace std;
 
 
-void readDistances(Graph &graph){
+void readDistances(Graph &graph,vector<POI> &points,GraphViewer &gv){
 	string line;
 	ifstream myfile ("Distances.txt");
+	int id= 0;
 	if(myfile.is_open()){
 		while(getline(myfile, line)){
 			stringstream ss(line);
@@ -34,27 +36,47 @@ void readDistances(Graph &graph){
 			if((graph.addEdge(source1, dest2,dist)) == false){
 				cout << "falhou!" << endl;
 			}
-			else return;
 
+			for(unsigned int i = 0; i < points.size(); i++){
+				for(unsigned int j = 0; j < points.size();j++){
+					if(points[i].getName() == source && points[j].getName() == dest){
+						gv.addEdge(id,i,j,EdgeType::DIRECTED);
+						id++;
+					}
+				}
+			}
 		}
-
 	}
+	gv.rearrange();
 }
 
-void readPointsOfInterest(vector<POI> &points, Graph &graph){
+void readPointsOfInterest(vector<POI> &points, Graph &graph, GraphViewer &gv){
 	string line;
 	ifstream myfile ("AllPOI.txt");
+	int id = 0;
 	if(myfile.is_open()){
 		while(getline(myfile, line)){
-			POI p(line, false);
+			stringstream ss(line);
+			string poiName,x,y;
+			getline(ss,poiName,';');
+			getline(ss,x,';');
+			getline(ss,y,';');
+			double x1 = atof(x.c_str());
+			double y1 = atof(y.c_str());
+			POI p(poiName, false);
+			p.setX(x1);
+			p.setY(y1);
 			points.push_back(p);
 			graph.addVertex(p);
-
+			gv.addNode(id,x1,y1);
+			gv.setVertexLabel(id,poiName);
+			id++;
 		}
 	}
+	gv.rearrange();
 }
 
-void readUsers(vector<POI> &pointsToVisit, vector<Passenger> &passengers){
+void readUsers(vector<POI> &pointsToVisit, vector<Passenger> &passengers,GraphViewer &gv){
 	string line;
 	vector<POI> pois;
 	ifstream myfile("POI.txt");
@@ -74,22 +96,23 @@ void readUsers(vector<POI> &pointsToVisit, vector<Passenger> &passengers){
 	}
 }
 
-void checkVisitedPoints(vector<POI> &points, vector<POI> &pointsToVisit){
+void checkVisitedPoints(vector<POI> &points, vector<POI> &pointsToVisit,GraphViewer &gv){
 	for(unsigned int i = 0; i < points.size(); i++){
 		for(unsigned int j = 0; j< pointsToVisit.size(); j++){
 			if(points[i].getName() == pointsToVisit[j].getName() && points[i].getVisit() == false){
 				points[i].setVisit(true);
+				gv.setVertexColor(i,"green");
 			}
 		}
 	}
+	gv.rearrange();
 }
 
-void newPassenger(vector<Passenger> &passengers, vector<POI> &points, vector<POI> &pointsToVisit){
+void newPassenger(vector<Passenger> &passengers, vector<POI> &points, vector<POI> &pointsToVisit, GraphViewer &gv){
 	string name, poi;
 	int numPois;
 	vector<POI> pois;
 	cout << "Qual é o nome do passageiro? " ; cin >> name;
-
 	cout << "Quantos pontos de interesse quer visitar?"; cin >> numPois;
 	cout << "Que pontos de interesse quer visitar?" << endl;
 	for(unsigned int i = 0; i < points.size(); i++){
@@ -102,6 +125,15 @@ void newPassenger(vector<Passenger> &passengers, vector<POI> &points, vector<POI
 			if(points[i].getName() == poi){
 				POI newPoi(poi,true);
 				pois.push_back(newPoi);
+				gv.setVertexColor(i,"green");
+				gv.rearrange();
+			}
+		}
+	}
+	for(unsigned int i = 0; i < pois.size(); i++){
+		for(unsigned int j = 0; j < points.size(); j++){
+			if(pois[i].getName() != points[j].getName()){
+				points.push_back(points[i]);
 			}
 		}
 	}
@@ -134,72 +166,86 @@ void visitPoints(vector<POI> &points){
 	cout << endl;
 }
 
-void shortestPath(vector<POI> &pointsToVisit, vector<POI> &points, Graph &graph){
-	int distMin=30;
-	//graph.dijkstraShortestPath(points[0]); //ponto inicial : Aliados
-	while(!points.empty()){
-		int j=0;
+void shortestPath(vector<POI> &pointsToVisit, vector<POI> &points, Graph &graph) {
 
-		//POI minPOI;
-		int distMin=30;
-		for(unsigned int i = 0; i < points.size(); i++){
-			//cout << "entra: " << endl;
-			graph.dijkstraShortestPath(points[i]);
-			if(points[i].getVisit() == 1){
-				//cout << "entra 1, dist: " << endl;
-				cout << graph.getVertex(points[i])->getDist() << endl;
-				if(graph.getVertex(points[i])->getDist() <= distMin ){
-					//cout << " entra 2 " << endl;
-					distMin= graph.getVertex(points[i])->getDist();
-					//minPOI = points[i];
+	vector<POI> tmp= pointsToVisit;
+	int distTotal=0;
 
-					j=i;
-				}
+	graph.dijkstraShortestPath(points[0]); //ponto inicial : Aliados
+
+	cout << "O caminho percorrido será";
+
+	while (!tmp.empty()) {
+		int j;
+		POI minPOI;
+		double distMin = 10000;
+		for (unsigned int i = 0; i < tmp.size(); i++) {
+			if (graph.getVertex(tmp[i])->getDist() < distMin) {
+				distMin = graph.getVertex(tmp[i])->getDist();
+				minPOI = tmp[i];
+
+				j = i;
 			}
 		}
 
-
-		//graph.dijkstraShortestPath(points[j]);
-		points.erase(points.begin()+j);
+		cout<< "; " << graph.getVertex(tmp[j])->getInfo();
+		distTotal+=distMin;
+		graph.dijkstraShortestPath(tmp[j]);
+		tmp.erase(tmp.begin() + j);
 	}
+
+	cout<< ".\nA distancia percorrida é " << distTotal << "km." << endl;
 }
-int menus(vector<Passenger> &passengers, vector<POI> &points, vector<POI> &pointsToVisit, Graph &graph){
+
+void createGraphViewer(GraphViewer &gv){
+	gv.setBackground("map.png");
+	gv.createWindow(810,779);
+	gv.defineEdgeColor("black");
+	gv.defineVertexColor("blue");
+	gv.rearrange();
+}
+
+int menus(vector<Passenger> &passengers, vector<POI> &points, vector<POI> &pointsToVisit, Graph &graph,GraphViewer &gv){
 	int next;
 	cout << "O que deseja fazer?" << endl;
 	cout << " 1- Acrescentar passageiros." << endl;
 	cout << " 2- Ver passageiros existentes." << endl;
 	cout << " 3- Ver Pontos de Interesse existentes." << endl;
-	cout << " 4- Calcular o caminho mais curto." << endl;
-	cout << " 5- Ver Pontos de Interesse a visitar." << endl;
+	cout << " 4- Ver Pontos de Interesse a visitar." << endl;
+	cout << " 5- Calcular caminho mais curto." << endl;
 	cout << " 9- Sair." << endl;
 	cin >> next;
 
-	if(next ==1) newPassenger(passengers,points,pointsToVisit);
+	if(next ==1) newPassenger(passengers,points,pointsToVisit,gv);
 	if(next ==2) currentPassengers(passengers);
 	if(next ==3) currentPOI(points);
-	if(next ==4) shortestPath(pointsToVisit,points, graph);
-	if(next ==5) visitPoints(pointsToVisit);
+	if(next ==4) visitPoints(pointsToVisit);
+	if(next ==5) shortestPath(pointsToVisit,points, graph);
 	if(next ==9) return -1;
 
 }
+
 int main() {
 	Bus bus = Bus();
 	Graph graph = Graph();
 	POI poi = POI();
 	Passenger passenger = Passenger();
+	GraphViewer *gv = new GraphViewer(600,600,false);
 	vector<Passenger> passengers;
 	vector<POI> points;
 	vector<POI> pointsToVisit;
 
-	readPointsOfInterest(points, graph);
-	readDistances(graph);
-	readUsers(pointsToVisit, passengers);
-	checkVisitedPoints(points,pointsToVisit);
+	createGraphViewer(*gv);
+	readPointsOfInterest(points, graph, *gv);
+	readDistances(graph,points,*gv);
+	readUsers(pointsToVisit, passengers,*gv);
+	checkVisitedPoints(points,pointsToVisit,*gv);
+
 
 
 	do{
 	}while
-		(menus(passengers,points,pointsToVisit, graph)!= -1);
+		(menus(passengers,points,pointsToVisit, graph,*gv)!= -1);
 	cout <<"Exit!" << endl;
 	exit(0);
 }

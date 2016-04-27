@@ -17,6 +17,7 @@ class POI {
 private:
 	string name;
 	bool visit;
+	double x, y;
 
 public:
 	POI();
@@ -25,6 +26,10 @@ public:
 	bool getVisit() const ;
 	void setVisit(bool visit);
 	bool operator ==(const POI p1) const;
+	double getX() const;
+	double getY() const;
+	void setX(double x);
+	void setY(double y);
 };
 
 #endif /* POI_H_ */
